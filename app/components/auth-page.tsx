@@ -15,17 +15,17 @@ type AuthPageProps = {
 const authCopy = {
   "sign-in": {
     eyebrow: "Welcome back",
-    title: "Sign in to Trackdesk",
+    title: "Sign in to Aaplio",
     description:
       "Return to your job search workspace and review the next action for every active opportunity.",
     submitLabel: "Sign in",
-    alternateLabel: "New to Trackdesk?",
+    alternateLabel: "New to Aaplio?",
     alternateAction: "Create an account",
     alternateHref: "/sign-up",
   },
   "sign-up": {
     eyebrow: "Start your workspace",
-    title: "Create your Trackdesk account",
+    title: "Create your Aaplio account",
     description:
       "Set up a focused pipeline for applications, interviews, follow-ups, and offers.",
     submitLabel: "Create account",
@@ -172,12 +172,12 @@ export function AuthPage({ mode }: AuthPageProps) {
         <Link
           href="/"
           className="flex items-center gap-3"
-          aria-label="Trackdesk home"
+          aria-label="Aaplio home"
         >
           <span className="grid size-8 place-items-center rounded-[8px] border border-white/15 bg-white text-sm font-bold text-black">
             T
           </span>
-          <span className="text-sm font-semibold text-white">Trackdesk</span>
+          <span className="text-sm font-semibold text-white">Aaplio</span>
         </Link>
 
         <Reveal className="max-w-xl">
@@ -215,12 +215,12 @@ export function AuthPage({ mode }: AuthPageProps) {
           <Link
             href="/"
             className="mb-10 inline-flex items-center gap-3 lg:hidden"
-            aria-label="Trackdesk home"
+            aria-label="Aaplio home"
           >
             <span className="grid size-8 place-items-center rounded-[8px] border border-white/15 bg-white text-sm font-bold text-black">
               T
             </span>
-            <span className="text-sm font-semibold text-white">Trackdesk</span>
+            <span className="text-sm font-semibold text-white">Aaplio</span>
           </Link>
 
           <div className="rounded-[8px] border border-white/10 bg-zinc-950 p-6 shadow-2xl shadow-black/60 sm:p-8">

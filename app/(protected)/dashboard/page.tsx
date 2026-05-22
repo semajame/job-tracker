@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Dashboard | Trackdesk",
-  description: "Your protected Trackdesk job search dashboard.",
+  title: "Dashboard | Aaplio",
+  description: "Your protected Aaplio job search dashboard.",
 };
 
 type JobApplication = {
@@ -238,9 +238,9 @@ export default async function DashboardPage() {
                     <span className="text-zinc-400">{label}</span>
                     <span className="text-white">{value}</span>
                   </div>
-                  <div className="h-2 rounded-[8px] bg-zinc-900">
+                  <div className="h-2 rounded-[8px] bg-emerald-950/60">
                     <div
-                      className="h-2 rounded-[8px] bg-white"
+                      className="h-2 rounded-[8px] bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.75)]"
                       style={{ width: value }}
                     />
                   </div>

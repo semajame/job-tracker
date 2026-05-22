@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import Link from "next/link";
 
 export type ApplicationStatus =
   | "wishlist"
@@ -168,7 +169,11 @@ export function JobApplicationsClient({ initialApplications }: Props) {
         throw new Error(data.error ?? "Could not save application.");
       }
 
-      if (editingId) {
+      if (data.application.status === "offer") {
+        setApplications((current) =>
+          current.filter((item) => item.id !== data.application.id),
+        );
+      } else if (editingId) {
         setApplications((current) =>
           current.map((item) =>
             item.id === data.application.id ? data.application : item,
@@ -179,7 +184,13 @@ export function JobApplicationsClient({ initialApplications }: Props) {
       }
 
       resetForm();
-      setMessage(editingId ? "Application updated." : "Application created.");
+      setMessage(
+        data.application.status === "offer"
+          ? "Application moved to offer stage."
+          : editingId
+            ? "Application updated."
+            : "Application created.",
+      );
     } catch (error) {
       setMessage(
         error instanceof Error ? error.message : "Could not save application.",
@@ -401,7 +412,7 @@ export function JobApplicationsClient({ initialApplications }: Props) {
           </label>
 
           <button
-            className="h-11 w-full rounded-[8px] bg-white px-4 text-sm font-semibold text-black transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-400"
+            className="h-11 w-full rounded-[8px] bg-white px-4 text-sm font-semibold text-black transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:bg-zinc-700 cursor-pointer disabled:text-zinc-400"
             disabled={isSaving}
             type="submit"
           >
@@ -488,6 +499,12 @@ export function JobApplicationsClient({ initialApplications }: Props) {
                     </td>
                     <td className="px-5 py-4 align-top">
                       <div className="flex gap-2">
+                        <Link
+                          className="grid h-9 place-items-center rounded-[8px] border border-white/10 px-3 text-xs font-semibold text-white transition hover:bg-white/5"
+                          href={`/applications/${application.id}`}
+                        >
+                          View
+                        </Link>
                         <button
                           className="h-9 rounded-[8px] border border-white/10 px-3 text-xs font-semibold text-white transition hover:bg-white/5 cursor-pointer"
                           onClick={() => handleEdit(application)}

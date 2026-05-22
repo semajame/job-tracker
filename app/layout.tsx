@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Trackdesk | Job Tracker",
+  title: "Aaplio | Job Tracker",
   description:
     "A focused job tracker for managing applications, interviews, follow-ups, and offers.",
 };

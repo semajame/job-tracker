@@ -8,8 +8,9 @@ import { usePathname } from "next/navigation";
 const navigationItems = [
   { label: "Overview", href: "/dashboard" },
   { label: "Applications", href: "/applications" },
-  { label: "Interviews", href: "#" },
-  { label: "Offers", href: "#" },
+  { label: "Employers", href: "/employers" },
+  // { label: "Offers", href: "#" },
+  { label: "Settings", href: "/settings" },
 ];
 
 type AppSidebarProps = {
@@ -26,12 +27,12 @@ export function AppSidebar({ userEmail }: AppSidebarProps) {
         <Link
           href="/"
           className="flex items-center gap-3"
-          aria-label="Trackdesk home"
+          aria-label="Aaplio home"
         >
           <span className="grid size-8 place-items-center rounded-[8px] border border-white/15 bg-white text-sm font-bold text-black">
             T
           </span>
-          <span className="text-sm font-semibold text-white">Trackdesk</span>
+          <span className="text-sm font-semibold text-white">Aaplio</span>
         </Link>
 
         <div className="lg:hidden">
@@ -41,7 +42,11 @@ export function AppSidebar({ userEmail }: AppSidebarProps) {
 
       <nav className="mt-6 flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible lg:pb-0">
         {navigationItems.map((item) => {
-          const isActive = item.href !== "#" && pathname === item.href;
+          const isActive =
+            item.href !== "#" &&
+            (pathname === item.href ||
+              (item.href !== "/dashboard" &&
+                pathname.startsWith(`${item.href}/`)));
 
           return (
             <Link

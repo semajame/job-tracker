@@ -113,6 +113,7 @@ export async function GET() {
     .from("job_applications")
     .select("*")
     .eq("user_id", user.id)
+    .neq("status", "offer")
     .order("created_at", { ascending: false });
 
   if (error) {

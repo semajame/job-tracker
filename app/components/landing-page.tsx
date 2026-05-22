@@ -81,11 +81,15 @@ function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-black/85 backdrop-blur">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
-        <a href="#" className="flex items-center gap-3" aria-label="Trackdesk home">
+        <a
+          href="#"
+          className="flex items-center gap-3"
+          aria-label="Aaplio home"
+        >
           <span className="grid size-8 place-items-center rounded-[8px] border border-white/15 bg-white text-sm font-bold text-black">
             T
           </span>
-          <span className="text-sm font-semibold text-white">Trackdesk</span>
+          <span className="text-sm font-semibold text-white">Aaplio</span>
         </a>
 
         <div className="hidden items-center gap-8 text-sm text-zinc-300 md:flex">
@@ -137,7 +141,7 @@ function DashboardPreview() {
               T
             </span>
             <div>
-              <p className="text-sm font-semibold text-white">Trackdesk</p>
+              <p className="text-sm font-semibold text-white">Aaplio</p>
               <p className="text-xs text-zinc-500">May search sprint</p>
             </div>
           </div>
@@ -348,8 +352,8 @@ function Workflow() {
             Turn scattered job hunting into a repeatable review.
           </h2>
           <p className="mt-5 text-base leading-8 text-zinc-400">
-            Trackdesk keeps the process quiet and structured, so every role has
-            a state, a date, and a reason to stay in your pipeline.
+            Aaplio keeps the process quiet and structured, so every role has a
+            state, a date, and a reason to stay in your pipeline.
           </p>
         </Reveal>
 
@@ -403,7 +407,7 @@ function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black py-8">
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 px-5 text-sm text-zinc-500 sm:flex-row sm:items-center sm:px-8">
-        <p>Trackdesk</p>
+        <p>Aaplio</p>
         <div className="flex gap-5">
           <a className="hover:text-white" href="#">
             Privacy

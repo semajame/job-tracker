@@ -7,7 +7,7 @@ import { createClient } from "@/supabase/server";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Applications | Trackdesk",
+  title: "Applications | Aaplio",
   description: "Create, update, and manage your tracked job applications.",
 };
 
@@ -26,6 +26,7 @@ export default async function ApplicationsPage() {
     .from("job_applications")
     .select("*")
     .eq("user_id", user.id)
+    .neq("status", "offer")
     .order("created_at", { ascending: false });
 
   if (applicationsError) {
