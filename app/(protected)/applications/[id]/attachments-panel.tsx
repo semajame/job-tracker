@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import { AttachmentUploader } from "./attachment-uploader";
 
 type JobAttachment = {
   id: string;
@@ -64,10 +65,12 @@ export function AttachmentsPanel({
     ? getAttachmentUrl(applicationId, previewAttachment.id)
     : "";
   const downloadUrl = previewAttachment ? `${previewUrl}?download=1` : "";
+  const shouldScrollAttachments = attachments.length >= 4;
 
   return (
     <>
       <section className="rounded-[8px] border border-white/10 bg-zinc-950">
+        <AttachmentUploader applicationId={applicationId} />
         <div className="border-b border-white/10 px-5 py-4">
           <h2 className="text-lg font-semibold text-white">Attachments</h2>
           <p className="mt-1 text-sm text-zinc-500">
@@ -76,7 +79,11 @@ export function AttachmentsPanel({
         </div>
 
         {attachments.length > 0 ? (
-          <div className="divide-y divide-white/10">
+          <div
+            className={`divide-y divide-white/10 ${
+              shouldScrollAttachments ? "max-h-[520px] overflow-y-auto" : ""
+            }`}
+          >
             {attachments.map((attachment) => (
               <article className="px-5 py-4" key={attachment.id}>
                 <p className="break-words text-sm font-medium text-white">

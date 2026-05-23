@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 
 type JobApplication = {
@@ -41,13 +41,6 @@ type Employer = {
 type EmployerDetailsTabsProps = {
   employer: Employer;
 };
-
-type TabKey = "employment" | "application";
-
-const tabs: { key: TabKey; label: string }[] = [
-  { key: "employment", label: "Employment details" },
-  { key: "application", label: "Job application" },
-];
 
 function formatDate(value: string | null) {
   if (!value) {
@@ -118,185 +111,185 @@ function DetailItem({ label, value }: { label: string; value: string }) {
 
 export function EmployerDetailsTabs({ employer }: EmployerDetailsTabsProps) {
   const shouldReduceMotion = useReducedMotion();
-  const [activeTab, setActiveTab] = useState<TabKey>("employment");
+  const [isOpen, setIsOpen] = useState(true);
   const linkedApplication = employer.job_applications;
 
   return (
-    <section className="rounded-[8px] border border-white/10 bg-zinc-950">
-      <div className="border-b border-white/10 px-5 py-4">
-        <div
-          aria-label="Employer detail sections"
-          className="flex gap-2 overflow-x-auto pb-1"
-          role="tablist"
+    <section
+      aria-label="Employer detail sections"
+      className="overflow-hidden rounded-[8px] border border-white/10 bg-zinc-950"
+    >
+      <h2>
+        <button
+          aria-controls="employer-details-panel"
+          aria-expanded={isOpen}
+          className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-white/[0.03]"
+          id="employer-details-header"
+          onClick={() => setIsOpen((current) => !current)}
+          type="button"
         >
-          {tabs.map((tab) => {
-            const isActive = activeTab === tab.key;
+          <span className="text-lg font-semibold text-white">Details</span>
+          <span
+            aria-hidden="true"
+            className={`grid h-8 w-8 shrink-0 place-items-center rounded-[8px] border border-white/10 text-lg font-medium transition bg-black textt-white`}
+          >
+            {isOpen ? "-" : "+"}
+          </span>
+        </button>
+      </h2>
 
-            return (
-              <button
-                aria-selected={isActive}
-                className={`relative whitespace-nowrap rounded-[8px] px-3 py-2 text-sm font-medium transition-colors cursor-pointer ${
-                  isActive
-                    ? "text-black"
-                    : "text-zinc-400 hover:bg-white/5 hover:text-white"
-                }`}
-                key={tab.key}
-                onClick={() => setActiveTab(tab.key)}
-                role="tab"
-                type="button"
-              >
-                {isActive ? (
-                  <motion.span
-                    className="absolute inset-0 rounded-[8px] bg-white"
-                    layoutId="employer-details-active-tab"
-                    transition={
-                      shouldReduceMotion
-                        ? { duration: 0 }
-                        : { duration: 0.28, ease: [0.22, 1, 0.36, 1] }
-                    }
-                  />
-                ) : null}
-                <span className="relative z-10">{tab.label}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
+      <AnimatePresence initial={false}>
+        {isOpen ? (
+          <motion.div
+            animate={{ height: "auto", opacity: 1 }}
+            className="overflow-hidden border-t border-white/10 flex justify-between gap-6 xl:gap-8 "
+            exit={{ height: 0, opacity: 0 }}
+            id="employer-details-panel"
+            initial={{ height: 0, opacity: 0 }}
+            role="region"
+            aria-labelledby="employer-details-header"
+            transition={
+              shouldReduceMotion
+                ? { duration: 0 }
+                : { duration: 0.24, ease: [0.22, 1, 0.36, 1] }
+            }
+          >
+            <div className="w-full p-5">
+              <h3 className="text-lg font-semibold text-white">
+                Job application
+              </h3>
+              {linkedApplication ? (
+                <>
+                  <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                    <DetailItem
+                      label="Company"
+                      value={linkedApplication.company}
+                    />
+                    <DetailItem label="Role" value={linkedApplication.role} />
+                    <DetailItem
+                      label="Status"
+                      value={linkedApplication.status}
+                    />
+                    <DetailItem
+                      label="Location"
+                      value={linkedApplication.location ?? "Not set"}
+                    />
+                    <DetailItem
+                      label="Salary range"
+                      value={formatApplicationSalary(
+                        linkedApplication.salary_min,
+                        linkedApplication.salary_max,
+                      )}
+                    />
+                    <DetailItem
+                      label="Applied date"
+                      value={formatDate(linkedApplication.applied_at)}
+                    />
+                    <DetailItem
+                      label="Follow-up date"
+                      value={formatDate(linkedApplication.follow_up_at)}
+                    />
+                    <DetailItem
+                      label="Updated"
+                      value={formatDateTime(linkedApplication.updated_at)}
+                    />
+                  </div>
 
-      <div className="p-5">
-        {activeTab === "employment" ? (
-          <div role="tabpanel">
-            <h2 className="text-lg font-semibold text-white">
-              Employment details
-            </h2>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              <DetailItem
-                label="Employment type"
-                value={formatEmploymentType(employer.employment_type)}
-              />
-              <DetailItem
-                label="Department"
-                value={employer.department ?? "Not set"}
-              />
-              <DetailItem
-                label="Manager"
-                value={employer.manager_name ?? "Not set"}
-              />
-              <DetailItem
-                label="Manager email"
-                value={employer.manager_email ?? "Not set"}
-              />
-              <DetailItem
-                label="Office address"
-                value={employer.office_address ?? "Not set"}
-              />
-              <DetailItem
-                label="Final salary"
-                value={formatSalary(employer.salary, employer.currency)}
-              />
-              <DetailItem
-                label="Start date"
-                value={formatDate(employer.start_date)}
-              />
-              <DetailItem
-                label="End date"
-                value={formatDate(employer.end_date)}
-              />
-              <DetailItem
-                label="Created"
-                value={formatDateTime(employer.created_at)}
-              />
-              <DetailItem
-                label="Updated"
-                value={formatDateTime(employer.updated_at)}
-              />
-            </div>
-
-            <div className="mt-4 rounded-[8px] border border-white/10 bg-black p-4">
-              <p className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
-                Notes
-              </p>
-              <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-zinc-200">
-                {employer.notes ?? "No notes yet."}
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div role="tabpanel">
-            <h2 className="text-lg font-semibold text-white">
-              Job application
-            </h2>
-            {linkedApplication ? (
-              <>
-                <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                  <DetailItem
-                    label="Company"
-                    value={linkedApplication.company}
-                  />
-                  <DetailItem label="Role" value={linkedApplication.role} />
-                  <DetailItem label="Status" value={linkedApplication.status} />
-                  <DetailItem
-                    label="Location"
-                    value={linkedApplication.location ?? "Not set"}
-                  />
-                  <DetailItem
-                    label="Salary range"
-                    value={formatApplicationSalary(
-                      linkedApplication.salary_min,
-                      linkedApplication.salary_max,
-                    )}
-                  />
-                  <DetailItem
-                    label="Applied date"
-                    value={formatDate(linkedApplication.applied_at)}
-                  />
-                  <DetailItem
-                    label="Follow-up date"
-                    value={formatDate(linkedApplication.follow_up_at)}
-                  />
-                  <DetailItem
-                    label="Updated"
-                    value={formatDateTime(linkedApplication.updated_at)}
-                  />
-                </div>
-
-                <div className="mt-4 rounded-[8px] border border-white/10 bg-black p-4">
-                  <p className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
-                    Job URL
-                  </p>
-                  {linkedApplication.job_url ? (
-                    <a
-                      className="mt-3 inline-block break-all text-sm font-medium leading-6 text-zinc-200 underline-offset-4 hover:text-white hover:underline"
-                      href={linkedApplication.job_url}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      {linkedApplication.job_url}
-                    </a>
-                  ) : (
-                    <p className="mt-3 text-sm leading-6 text-zinc-200">
-                      Not set
+                  <div className="mt-4 rounded-[8px] border border-white/10 bg-black p-4">
+                    <p className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
+                      Job URL
                     </p>
-                  )}
-                </div>
+                    {linkedApplication.job_url ? (
+                      <a
+                        className="mt-3 inline-block break-all text-sm font-medium leading-6 text-zinc-200 underline-offset-4 hover:text-white hover:underline"
+                        href={linkedApplication.job_url}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        {linkedApplication.job_url}
+                      </a>
+                    ) : (
+                      <p className="mt-3 text-sm leading-6 text-zinc-200">
+                        Not set
+                      </p>
+                    )}
+                  </div>
 
-                <div className="mt-4 rounded-[8px] border border-white/10 bg-black p-4">
-                  <p className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
-                    Application notes
-                  </p>
-                  <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-zinc-200">
-                    {linkedApplication.notes ?? "No notes yet."}
-                  </p>
+                  <div className="mt-4 rounded-[8px] border border-white/10 bg-black p-4">
+                    <p className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
+                      Application notes
+                    </p>
+                    <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-zinc-200">
+                      {linkedApplication.notes ?? "No notes yet."}
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <div className="mt-5 rounded-[8px] border border-white/10 bg-black px-4 py-8 text-sm text-zinc-400">
+                  This employer is not linked to an application yet.
                 </div>
-              </>
-            ) : (
-              <div className="mt-5 rounded-[8px] border border-white/10 bg-black px-4 py-8 text-sm text-zinc-400">
-                This employer is not linked to an application yet.
+              )}
+            </div>
+            <div className="p-5 w-full">
+              <h3 className="text-lg font-semibold text-white">
+                Employment details
+              </h3>
+
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                <DetailItem
+                  label="Employment type"
+                  value={formatEmploymentType(employer.employment_type)}
+                />
+                <DetailItem
+                  label="Department"
+                  value={employer.department ?? "Not set"}
+                />
+                <DetailItem
+                  label="Manager"
+                  value={employer.manager_name ?? "Not set"}
+                />
+                <DetailItem
+                  label="Manager email"
+                  value={employer.manager_email ?? "Not set"}
+                />
+                <DetailItem
+                  label="Office address"
+                  value={employer.office_address ?? "Not set"}
+                />
+                <DetailItem
+                  label="Final salary"
+                  value={formatSalary(employer.salary, employer.currency)}
+                />
+                <DetailItem
+                  label="Start date"
+                  value={formatDate(employer.start_date)}
+                />
+                <DetailItem
+                  label="End date"
+                  value={formatDate(employer.end_date)}
+                />
+                <DetailItem
+                  label="Created"
+                  value={formatDateTime(employer.created_at)}
+                />
+                <DetailItem
+                  label="Updated"
+                  value={formatDateTime(employer.updated_at)}
+                />
               </div>
-            )}
-          </div>
-        )}
-      </div>
+
+              <div className="mt-4 rounded-[8px] border border-white/10 bg-black p-4">
+                <p className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
+                  Notes
+                </p>
+                <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-zinc-200">
+                  {employer.notes ?? "No notes yet."}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </section>
   );
 }

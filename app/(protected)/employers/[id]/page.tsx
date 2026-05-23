@@ -1,5 +1,8 @@
-import { AttachmentUploader } from "@/app/(protected)/applications/[id]/attachment-uploader";
 import { AttachmentsPanel } from "@/app/(protected)/applications/[id]/attachments-panel";
+import {
+  JobNotesPanel,
+  type JobNote,
+} from "@/app/(protected)/applications/[id]/job-notes-panel";
 import { EmployerDetailsTabs } from "@/app/(protected)/employers/[id]/employer-details-tabs";
 import { Reveal } from "@/app/components/motion-effects";
 import { createClient } from "@/supabase/server";
@@ -98,7 +101,22 @@ export default async function EmployerDetailsPage(props: {
     throw new Error(attachmentsError.message);
   }
 
+  const { data: notes, error: notesError } = applicationId
+    ? await supabase
+        .from("job_notes")
+        .select("id, title, content, is_pinned, created_at, updated_at")
+        .eq("application_id", applicationId)
+        .eq("user_id", user.id)
+        .order("is_pinned", { ascending: false })
+        .order("updated_at", { ascending: false })
+    : { data: [], error: null };
+
+  if (notesError) {
+    throw new Error(notesError.message);
+  }
+
   const currentAttachments = (attachments ?? []) as JobAttachment[];
+  const currentNotes = (notes ?? []) as JobNote[];
   const employerName = linkedApplication?.company ?? "Unlinked employer";
   const employerSubtitle = linkedApplication
     ? `${linkedApplication.role}${
@@ -134,18 +152,24 @@ export default async function EmployerDetailsPage(props: {
         </div>
       </Reveal>
 
-      <div className="mt-8 grid gap-6 xl:grid-cols-[1fr_380px]">
+      <div className="mt-8">
         <Reveal>
           <EmployerDetailsTabs employer={currentEmployer} />
         </Reveal>
 
-        <div className="grid gap-6">
+        <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[1fr_380px] xl:items-start">
           {applicationId ? (
             <>
-              <Reveal delay={0.1}>
-                <AttachmentUploader applicationId={applicationId} />
-              </Reveal>
-              <Reveal delay={0.15}>
+              <div className="grid gap-6">
+                <Reveal delay={0.15}>
+                  <JobNotesPanel
+                    applicationId={applicationId}
+                    notes={currentNotes}
+                  />
+                </Reveal>
+              </div>
+
+              <Reveal delay={0.2}>
                 <AttachmentsPanel
                   applicationId={applicationId}
                   attachments={currentAttachments}

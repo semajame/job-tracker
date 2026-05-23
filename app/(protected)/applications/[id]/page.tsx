@@ -1,5 +1,8 @@
-import { AttachmentUploader } from "@/app/(protected)/applications/[id]/attachment-uploader";
 import { AttachmentsPanel } from "@/app/(protected)/applications/[id]/attachments-panel";
+import {
+  JobNotesPanel,
+  type JobNote,
+} from "@/app/(protected)/applications/[id]/job-notes-panel";
 import { Reveal } from "@/app/components/motion-effects";
 import { createClient } from "@/supabase/server";
 import type { Metadata } from "next";
@@ -123,8 +126,21 @@ export default async function ApplicationDetailsPage(props: {
     throw new Error(attachmentsError.message);
   }
 
+  const { data: notes, error: notesError } = await supabase
+    .from("job_notes")
+    .select("id, title, content, is_pinned, created_at, updated_at")
+    .eq("application_id", id)
+    .eq("user_id", user.id)
+    .order("is_pinned", { ascending: false })
+    .order("updated_at", { ascending: false });
+
+  if (notesError) {
+    throw new Error(notesError.message);
+  }
+
   const currentApplication = application as JobApplication;
   const currentAttachments = (attachments ?? []) as JobAttachment[];
+  const currentNotes = (notes ?? []) as JobNote[];
 
   return (
     <section className="mx-auto w-full px-5 py-8 sm:px-8 sm:py-10">
@@ -229,11 +245,14 @@ export default async function ApplicationDetailsPage(props: {
         </Reveal>
 
         <div className="grid gap-6">
-          <Reveal delay={0.05}>
-            <AttachmentUploader applicationId={currentApplication.id} />
+          <Reveal delay={0.1}>
+            <JobNotesPanel
+              applicationId={currentApplication.id}
+              notes={currentNotes}
+            />
           </Reveal>
 
-          <Reveal delay={0.1}>
+          <Reveal delay={0.15}>
             <AttachmentsPanel
               applicationId={currentApplication.id}
               attachments={currentAttachments}

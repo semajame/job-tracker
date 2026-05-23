@@ -52,7 +52,7 @@ export function AttachmentUploader({ applicationId }: AttachmentUploaderProps) {
 
   return (
     <form
-      className="rounded-[8px] border border-white/10 bg-zinc-950 p-5"
+      className="rounded-[8px] p-5"
       encType="multipart/form-data"
       onSubmit={handleSubmit}
       ref={formRef}
