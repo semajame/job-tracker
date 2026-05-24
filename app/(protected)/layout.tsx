@@ -20,8 +20,8 @@ export default async function ProtectedLayout({
   }
 
   return (
-    <main className="min-h-screen bg-black text-white">
-      <PageTransition className="min-h-screen lg:grid lg:grid-cols-[280px_1fr]">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.08),transparent_34%),#000000] text-white">
+      <PageTransition className="min-h-screen lg:grid lg:grid-cols-[280px_minmax(0,1fr)]">
         <AppSidebar userEmail={user.email ?? ""} />
         {children}
       </PageTransition>

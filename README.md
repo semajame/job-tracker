@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tracklio
+
+Tracklio is a private job search workspace for tracking applications from saved role to signed offer. It helps keep roles, follow-ups, notes, employment records, and attachments in one focused dashboard.
+
+## Features
+
+- Dashboard overview for saved roles, applications, interviews, offers, follow-up coverage, and pipeline health.
+- Application tracking with company, role, location, job URL, salary range, status, applied date, follow-up date, and notes.
+- Employer records for accepted offers, including department, manager details, start/end dates, salary, and employment type.
+- Detail pages with collapsible application/employer summaries.
+- Notes and file attachments for each application.
+- Supabase authentication and protected routes.
+- Account settings for password updates.
+- Responsive layouts for desktop and mobile.
+
+## Tech Stack
+
+- Next.js App Router
+- React
+- TypeScript
+- Tailwind CSS
+- Supabase Auth, Database, and Storage
+- Motion for page and dialog transitions
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file with your Supabase project values:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
+SUPABASE_SECRET_KEY=your-service-role-or-secret-key
+```
+
+`SUPABASE_SECRET_KEY` is only used server-side for account deletion. Do not expose it in browser code.
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev
+npm run build
+npm run start
+npm run lint
+```
 
-## Learn More
+## Supabase Data
 
-To learn more about Next.js, take a look at the following resources:
+Tracklio expects tables for:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `job_applications`
+- `employers`
+- `job_notes`
+- `job_attachments`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Attachments are stored in Supabase Storage and referenced from `job_attachments`.
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `app/components` - shared UI, landing page, auth page, sidebar, motion helpers
+- `app/(auth)` - sign in and sign up routes
+- `app/(protected)` - authenticated dashboard, applications, employers, and settings
+- `app/api` - route handlers for applications, employers, notes, attachments, and account actions
+- `supabase` - Supabase client, server, middleware, and admin helpers
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+Build the app before deploying:
+
+```bash
+npm run build
+```
+
+Set the same Supabase environment variables in your hosting provider.

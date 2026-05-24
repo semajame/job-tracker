@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Employers | Aaplio",
+  title: "Employers | Tracklio",
   description: "Manage accepted roles and employment details.",
 };
 
@@ -50,10 +50,10 @@ export default async function EmployersPage() {
   }
 
   return (
-    <section className="mx-auto w-full px-5 py-8 sm:px-8 sm:py-10">
-      <Reveal className="flex flex-col gap-4 border-b border-white/10 pb-8">
+    <section className="mx-auto min-w-0 w-full px-5 py-8 sm:px-8 sm:py-10">
+      <Reveal className="flex flex-col gap-4 border-b border-emerald-300/10 pb-8">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.1em] text-zinc-500">
+          <p className="text-sm font-semibold uppercase tracking-[0.1em] text-emerald-300/80">
             Employers
           </p>
           <h1 className="mt-3 text-4xl font-semibold leading-tight text-white sm:text-5xl">
@@ -68,9 +68,7 @@ export default async function EmployersPage() {
 
       <Reveal className="mt-8">
         <EmployersClient
-          initialApplications={
-            (applications ?? []) as JobApplicationOption[]
-          }
+          initialApplications={(applications ?? []) as JobApplicationOption[]}
           initialEmployers={(employers ?? []) as Employer[]}
         />
       </Reveal>

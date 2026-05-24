@@ -98,8 +98,8 @@ function formatApplicationSalary(min: number | null, max: number | null) {
 
 function DetailItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[8px] border border-white/10 bg-black p-4">
-      <p className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
+    <div className="rounded-[8px] border border-white/10 bg-black p-4 transition hover:border-emerald-300/20">
+      <p className="text-xs font-medium uppercase tracking-[0.1em] text-emerald-300/70">
         {label}
       </p>
       <p className="mt-3 break-words text-sm leading-6 text-zinc-200">
@@ -117,13 +117,13 @@ export function EmployerDetailsTabs({ employer }: EmployerDetailsTabsProps) {
   return (
     <section
       aria-label="Employer detail sections"
-      className="overflow-hidden rounded-[8px] border border-white/10 bg-zinc-950"
+      className="overflow-hidden rounded-[8px] border border-emerald-300/10 bg-zinc-950"
     >
       <h2>
         <button
           aria-controls="employer-details-panel"
           aria-expanded={isOpen}
-          className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-white/[0.03]"
+          className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-emerald-300/[0.04]"
           id="employer-details-header"
           onClick={() => setIsOpen((current) => !current)}
           type="button"
@@ -131,7 +131,7 @@ export function EmployerDetailsTabs({ employer }: EmployerDetailsTabsProps) {
           <span className="text-lg font-semibold text-white">Details</span>
           <span
             aria-hidden="true"
-            className={`grid h-8 w-8 shrink-0 place-items-center rounded-[8px] border border-white/10 text-lg font-medium transition bg-black textt-white`}
+            className="grid h-8 w-8 shrink-0 place-items-center rounded-[8px] border border-emerald-300/20 bg-black text-lg font-medium text-emerald-100 transition"
           >
             {isOpen ? "-" : "+"}
           </span>
@@ -142,7 +142,7 @@ export function EmployerDetailsTabs({ employer }: EmployerDetailsTabsProps) {
         {isOpen ? (
           <motion.div
             animate={{ height: "auto", opacity: 1 }}
-            className="overflow-hidden border-t border-white/10 flex justify-between gap-6 xl:gap-8 "
+            className="overflow-hidden border-t border-emerald-300/10 sm:flex sm:justify-between xl:gap-8"
             exit={{ height: 0, opacity: 0 }}
             id="employer-details-panel"
             initial={{ height: 0, opacity: 0 }}

@@ -24,7 +24,7 @@ export function SignOutButton({ className = "" }: SignOutButtonProps) {
 
   return (
     <button
-      className={`h-10 rounded-[8px] border border-white/10 bg-zinc-900 px-4 text-sm font-semibold text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:text-zinc-500 ${className}`}
+      className={`h-10 rounded-[8px] border border-emerald-300/15 bg-zinc-900 px-4 text-sm font-semibold text-white transition hover:border-emerald-300/30 hover:bg-emerald-300/10 hover:text-emerald-100 disabled:cursor-not-allowed disabled:text-zinc-500 ${className}`}
       disabled={loading}
       onClick={handleSignOut}
       type="button"

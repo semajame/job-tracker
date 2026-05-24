@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Dashboard | Aaplio",
-  description: "Your protected Aaplio job search dashboard.",
+  title: "Dashboard | Tracklio",
+  description: "Your protected Tracklio job search dashboard.",
 };
 
 type JobApplication = {
@@ -150,9 +150,9 @@ export default async function DashboardPage() {
 
   return (
     <section className="w-full px-5 py-8 sm:px-8 sm:py-10">
-      <Reveal className="flex flex-col gap-4 border-b border-white/10 pb-8 lg:flex-row lg:items-end lg:justify-between">
+      <Reveal className="flex flex-col gap-4 border-b border-emerald-300/10 pb-8 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.1em] text-zinc-500">
+          <p className="text-sm font-semibold uppercase tracking-[0.1em] text-emerald-300/80">
             Dashboard
           </p>
           <h1 className="mt-3 text-4xl font-semibold leading-tight text-white sm:text-5xl">
@@ -167,7 +167,7 @@ export default async function DashboardPage() {
       <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((item, index) => (
           <Reveal key={item.label} delay={index * 0.06}>
-            <article className="h-full rounded-[8px] border border-white/10 bg-zinc-950 p-5">
+            <article className="h-full rounded-[8px] border border-white/10 bg-zinc-950 p-5 transition hover:border-emerald-300/20">
               <p className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
                 {item.label}
               </p>
@@ -182,8 +182,8 @@ export default async function DashboardPage() {
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_360px]">
         <Reveal>
-          <section className="rounded-[8px] border border-white/10 bg-zinc-950">
-            <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+          <section className="rounded-[8px] border border-emerald-300/10 bg-zinc-950">
+            <div className="flex items-center justify-between border-b border-emerald-300/10 px-5 py-4">
               <h2 className="text-lg font-semibold text-white">
                 Today&apos;s queue
               </h2>
@@ -204,7 +204,7 @@ export default async function DashboardPage() {
                         {task.company}
                       </p>
                     </div>
-                    <span className="w-fit rounded-[8px] border border-white/10 bg-black px-3 py-1 text-xs font-medium text-zinc-200 capitalize">
+                    <span className="w-fit rounded-[8px] border border-emerald-300/20 bg-emerald-300/5 px-3 py-1 text-xs font-medium text-emerald-100 capitalize">
                       {task.stage}
                     </span>
                     <span className="text-sm text-zinc-400">{task.due}</span>

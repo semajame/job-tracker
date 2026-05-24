@@ -249,13 +249,13 @@ export function JobApplicationsClient({ initialApplications }: Props) {
   };
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[380px_1fr]">
-      <section className="rounded-[8px] border border-white/10 bg-zinc-950 p-5">
+    <div className="grid min-w-0 gap-6 xl:grid-cols-[minmax(0,380px)_minmax(0,1fr)]">
+      <section className="min-w-0 rounded-[8px] border border-emerald-300/10 bg-zinc-950 p-4 sm:p-5">
         <div className="flex items-center justify-between gap-4">
           <h2 className="text-lg font-semibold text-white">{formTitle}</h2>
           {editingId ? (
             <button
-              className="text-sm font-medium text-zinc-400 transition hover:text-white"
+              className="text-sm font-medium text-zinc-400 transition hover:text-emerald-100"
               onClick={resetForm}
               type="button"
             >
@@ -264,13 +264,13 @@ export function JobApplicationsClient({ initialApplications }: Props) {
           ) : null}
         </div>
 
-        <form className="mt-5 space-y-4" onSubmit={handleSubmit}>
+        <form className="mt-5 min-w-0 space-y-4" onSubmit={handleSubmit}>
           <label className="block">
             <span className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
               Company
             </span>
             <input
-              className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-white/40"
+              className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-emerald-300/45"
               onChange={(event) => updateField("company", event.target.value)}
               placeholder="Company name"
               required
@@ -283,7 +283,7 @@ export function JobApplicationsClient({ initialApplications }: Props) {
               Role
             </span>
             <input
-              className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-white/40"
+              className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-emerald-300/45"
               onChange={(event) => updateField("role", event.target.value)}
               placeholder="Product Designer"
               required
@@ -297,7 +297,7 @@ export function JobApplicationsClient({ initialApplications }: Props) {
                 Status
               </span>
               <select
-                className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition focus:border-white/40 cursor-pointer"
+                className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition focus:border-emerald-300/45 cursor-pointer"
                 onChange={(event) => updateField("status", event.target.value)}
                 value={form.status}
               >
@@ -314,7 +314,7 @@ export function JobApplicationsClient({ initialApplications }: Props) {
                 Location
               </span>
               <input
-                className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-white/40"
+                className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-emerald-300/45"
                 onChange={(event) =>
                   updateField("location", event.target.value)
                 }
@@ -329,7 +329,7 @@ export function JobApplicationsClient({ initialApplications }: Props) {
               Job URL
             </span>
             <input
-              className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-white/40"
+              className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-emerald-300/45"
               onChange={(event) => updateField("job_url", event.target.value)}
               placeholder="https://"
               type="url"
@@ -343,7 +343,7 @@ export function JobApplicationsClient({ initialApplications }: Props) {
                 Salary min
               </span>
               <input
-                className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-white/40"
+                className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-emerald-300/45"
                 min="0"
                 onChange={(event) =>
                   updateField("salary_min", event.target.value)
@@ -358,7 +358,7 @@ export function JobApplicationsClient({ initialApplications }: Props) {
                 Salary max
               </span>
               <input
-                className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-white/40"
+                className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-emerald-300/45"
                 min="0"
                 onChange={(event) =>
                   updateField("salary_max", event.target.value)
@@ -375,7 +375,7 @@ export function JobApplicationsClient({ initialApplications }: Props) {
                 Applied at
               </span>
               <input
-                className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition focus:border-white/40"
+                className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition focus:border-emerald-300/45"
                 onChange={(event) =>
                   updateField("applied_at", event.target.value)
                 }
@@ -389,7 +389,7 @@ export function JobApplicationsClient({ initialApplications }: Props) {
                 Follow up
               </span>
               <input
-                className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition focus:border-white/40"
+                className="mt-2 h-11 w-full rounded-[8px] border border-white/10 bg-black px-3 text-sm text-white outline-none transition focus:border-emerald-300/45"
                 onChange={(event) =>
                   updateField("follow_up_at", event.target.value)
                 }
@@ -404,7 +404,7 @@ export function JobApplicationsClient({ initialApplications }: Props) {
               Notes
             </span>
             <textarea
-              className="mt-2 min-h-24 w-full rounded-[8px] border border-white/10 bg-black px-3 py-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-white/40"
+              className="mt-2 min-h-24 w-full rounded-[8px] border border-white/10 bg-black px-3 py-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-emerald-300/45"
               onChange={(event) => updateField("notes", event.target.value)}
               placeholder="Recruiter names, next steps, fit notes"
               value={form.notes}
@@ -412,7 +412,7 @@ export function JobApplicationsClient({ initialApplications }: Props) {
           </label>
 
           <button
-            className="h-11 w-full rounded-[8px] bg-white px-4 text-sm font-semibold text-black transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:bg-zinc-700 cursor-pointer disabled:text-zinc-400"
+            className="h-11 w-full rounded-[8px] bg-white px-4 text-sm font-semibold text-black shadow-[0_0_18px_rgba(16,185,129,0.12)] transition hover:bg-emerald-100 disabled:cursor-not-allowed disabled:bg-zinc-700 cursor-pointer disabled:text-zinc-400"
             disabled={isSaving}
             type="submit"
           >
@@ -425,11 +425,11 @@ export function JobApplicationsClient({ initialApplications }: Props) {
         ) : null}
       </section>
 
-      <section className="rounded-[8px] border border-white/10 bg-zinc-950">
-        <div className="flex flex-col gap-2 border-b border-white/10 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+      <section className="min-w-0 overflow-hidden rounded-[8px] border border-emerald-300/10 bg-zinc-950">
+        <div className="flex flex-col gap-2 border-b border-emerald-300/10 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
           <h2 className="text-lg font-semibold text-white">Applications</h2>
           <button
-            className="w-fit text-sm font-medium text-zinc-400 transition hover:text-white"
+            className="w-fit text-sm font-medium text-zinc-400 transition hover:text-emerald-100"
             onClick={refreshApplications}
             type="button"
           >
@@ -442,93 +442,191 @@ export function JobApplicationsClient({ initialApplications }: Props) {
             <p className="text-sm text-zinc-400">No applications yet.</p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[760px] text-left text-sm">
-              <thead className="border-b border-white/10 text-xs uppercase tracking-[0.1em] text-zinc-500">
-                <tr>
-                  <th className="px-5 py-3 font-medium">Role</th>
-                  <th className="px-5 py-3 font-medium">Status</th>
-                  <th className="px-5 py-3 font-medium">Salary</th>
-                  <th className="px-5 py-3 font-medium">Applied Date</th>
-                  <th className="px-5 py-3 font-medium">Follow Date</th>
-                  <th className="px-5 py-3 font-medium">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/10 ">
-                {applications.map((application) => (
-                  <tr key={application.id}>
-                    <td className="px-5 py-4 align-top ">
-                      <div>
-                        <p className="font-medium text-white">
+          <>
+            <div className="divide-y divide-white/10 md:hidden">
+              {applications.map((application) => (
+                <article className="p-4" key={application.id}>
+                  <div className="min-w-0">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="min-w-0">
+                        <p className="break-words font-medium text-white">
                           {application.role}
                         </p>
-                        <p className="mt-1 text-zinc-500">
+                        <p className="mt-1 break-words text-sm text-zinc-500">
                           {application.company}
                           {application.location
                             ? ` - ${application.location}`
                             : ""}
                         </p>
-                        {application.job_url ? (
-                          <a
-                            className="mt-2 inline-block text-xs font-medium text-zinc-300 underline-offset-4 hover:text-white hover:underline"
-                            href={application.job_url}
-                            rel="noreferrer"
-                            target="_blank"
-                          >
-                            View posting
-                          </a>
-                        ) : null}
                       </div>
-                    </td>
-                    <td className="px-5 py-4 align-top">
-                      <span className="inline-flex rounded-[8px] border border-white/10 bg-black px-3 py-1 text-xs font-medium capitalize text-zinc-200">
+                      <span className="inline-flex w-fit rounded-[8px] border border-emerald-300/20 bg-emerald-300/5 px-3 py-1 text-xs font-medium capitalize text-emerald-100">
                         {application.status}
                       </span>
-                    </td>
-                    <td className="px-5 py-4 align-top text-zinc-400">
-                      {formatSalary(
-                        application.salary_min,
-                        application.salary_max,
-                      )}
-                    </td>
-                    <td className="px-5 py-4 align-top text-zinc-400">
-                      {formatDate(application.applied_at)}
-                    </td>
-                    <td className="px-5 py-4 align-top text-zinc-400">
-                      {formatDate(application.follow_up_at)}
-                    </td>
-                    <td className="px-5 py-4 align-top">
-                      <div className="flex gap-2">
-                        <Link
-                          className="grid h-9 place-items-center rounded-[8px] border border-white/10 px-3 text-xs font-semibold text-white transition hover:bg-white/5"
-                          href={`/applications/${application.id}`}
-                        >
-                          View
-                        </Link>
-                        <button
-                          className="h-9 rounded-[8px] border border-white/10 px-3 text-xs font-semibold text-white transition hover:bg-white/5 cursor-pointer"
-                          onClick={() => handleEdit(application)}
-                          type="button"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="h-9 rounded-[8px] border border-red-400/30 px-3 text-xs font-semibold text-red-200 transition hover:bg-red-500/10 disabled:cursor-not-allowed disabled:text-red-900 cursor-pointer"
-                          disabled={deletingId === application.id}
-                          onClick={() => setPendingDelete(application)}
-                          type="button"
-                        >
-                          {deletingId === application.id
-                            ? "Deleting..."
-                            : "Delete"}
-                        </button>
+                    </div>
+
+                    <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+                      <div>
+                        <dt className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
+                          Salary
+                        </dt>
+                        <dd className="mt-1 break-words text-zinc-300">
+                          {formatSalary(
+                            application.salary_min,
+                            application.salary_max,
+                          )}
+                        </dd>
                       </div>
-                    </td>
+                      <div>
+                        <dt className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
+                          Applied
+                        </dt>
+                        <dd className="mt-1 text-zinc-300">
+                          {formatDate(application.applied_at)}
+                        </dd>
+                      </div>
+                      <div>
+                        <dt className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
+                          Follow up
+                        </dt>
+                        <dd className="mt-1 text-zinc-300">
+                          {formatDate(application.follow_up_at)}
+                        </dd>
+                      </div>
+                      {application.job_url ? (
+                        <div>
+                          <dt className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
+                            Posting
+                          </dt>
+                          <dd className="mt-1">
+                            <a
+                              className="break-words text-xs font-medium text-zinc-300 underline-offset-4 hover:text-white hover:underline"
+                              href={application.job_url}
+                              rel="noreferrer"
+                              target="_blank"
+                            >
+                              View posting
+                            </a>
+                          </dd>
+                        </div>
+                      ) : null}
+                    </dl>
+
+                    <div className="mt-4 grid grid-cols-3 gap-2">
+                      <Link
+                        className="grid h-10 min-w-0 place-items-center rounded-[8px] border border-white/10 px-2 text-xs font-semibold text-white transition hover:bg-white/5"
+                        href={`/applications/${application.id}`}
+                      >
+                        View
+                      </Link>
+                      <button
+                        className="h-10 min-w-0 rounded-[8px] border border-white/10 px-2 text-xs font-semibold text-white transition hover:bg-white/5 cursor-pointer"
+                        onClick={() => handleEdit(application)}
+                        type="button"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="h-10 min-w-0 rounded-[8px] border border-red-400/30 px-2 text-xs font-semibold text-red-200 transition hover:bg-red-500/10 disabled:cursor-not-allowed disabled:text-red-900 cursor-pointer"
+                        disabled={deletingId === application.id}
+                        onClick={() => setPendingDelete(application)}
+                        type="button"
+                      >
+                        {deletingId === application.id ? "Deleting" : "Delete"}
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="hidden overflow-x-auto md:block">
+              <table className="w-full min-w-[760px] text-left text-sm">
+                <thead className="border-b border-white/10 text-xs uppercase tracking-[0.1em] text-zinc-500">
+                  <tr>
+                    <th className="px-5 py-3 font-medium">Role</th>
+                    <th className="px-5 py-3 font-medium">Status</th>
+                    <th className="px-5 py-3 font-medium">Salary</th>
+                    <th className="px-5 py-3 font-medium">Applied Date</th>
+                    <th className="px-5 py-3 font-medium">Follow Date</th>
+                    <th className="px-5 py-3 font-medium">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody className="divide-y divide-white/10 ">
+                  {applications.map((application) => (
+                    <tr key={application.id}>
+                      <td className="px-5 py-4 align-top ">
+                        <div>
+                          <p className="font-medium text-white">
+                            {application.role}
+                          </p>
+                          <p className="mt-1 text-zinc-500">
+                            {application.company}
+                            {application.location
+                              ? ` - ${application.location}`
+                              : ""}
+                          </p>
+                          {application.job_url ? (
+                            <a
+                              className="mt-2 inline-block text-xs font-medium text-zinc-300 underline-offset-4 hover:text-white hover:underline"
+                              href={application.job_url}
+                              rel="noreferrer"
+                              target="_blank"
+                            >
+                              View posting
+                            </a>
+                          ) : null}
+                        </div>
+                      </td>
+                      <td className="px-5 py-4 align-top">
+                        <span className="inline-flex rounded-[8px] border border-emerald-300/20 bg-emerald-300/5 px-3 py-1 text-xs font-medium capitalize text-emerald-100">
+                          {application.status}
+                        </span>
+                      </td>
+                      <td className="px-5 py-4 align-top text-zinc-400">
+                        {formatSalary(
+                          application.salary_min,
+                          application.salary_max,
+                        )}
+                      </td>
+                      <td className="px-5 py-4 align-top text-zinc-400">
+                        {formatDate(application.applied_at)}
+                      </td>
+                      <td className="px-5 py-4 align-top text-zinc-400">
+                        {formatDate(application.follow_up_at)}
+                      </td>
+                      <td className="px-5 py-4 align-top">
+                        <div className="flex gap-2">
+                          <Link
+                            className="grid h-9 place-items-center rounded-[8px] border border-white/10 px-3 text-xs font-semibold text-white transition hover:bg-white/5"
+                            href={`/applications/${application.id}`}
+                          >
+                            View
+                          </Link>
+                          <button
+                            className="h-9 rounded-[8px] border border-white/10 px-3 text-xs font-semibold text-white transition hover:bg-white/5 cursor-pointer"
+                            onClick={() => handleEdit(application)}
+                            type="button"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className="h-9 rounded-[8px] border border-red-400/30 px-3 text-xs font-semibold text-red-200 transition hover:bg-red-500/10 disabled:cursor-not-allowed disabled:text-red-900 cursor-pointer"
+                            disabled={deletingId === application.id}
+                            onClick={() => setPendingDelete(application)}
+                            type="button"
+                          >
+                            {deletingId === application.id
+                              ? "Deleting..."
+                              : "Delete"}
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
       </section>
 

@@ -11,7 +11,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Employer Details | Aaplio",
+  title: "Employer Details | Tracklio",
   description: "View employer details and manage related attachments.",
 };
 
@@ -126,16 +126,16 @@ export default async function EmployerDetailsPage(props: {
 
   return (
     <section className="mx-auto w-full px-5 py-8 sm:px-8 sm:py-10">
-      <Reveal className="flex flex-col gap-5 border-b border-white/10 pb-8">
+      <Reveal className="flex flex-col gap-5 border-b border-emerald-300/10 pb-8">
         <Link
-          className="w-fit text-sm font-medium text-zinc-400 transition hover:text-white"
+          className="w-fit text-sm font-medium text-zinc-400 transition hover:text-emerald-100"
           href="/employers"
         >
           Back to employers
         </Link>
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.1em] text-zinc-500">
+            <p className="text-sm font-semibold uppercase tracking-[0.1em] text-emerald-300/80">
               Employer
             </p>
             <h1 className="mt-3 text-4xl font-semibold leading-tight text-white sm:text-5xl">
@@ -146,7 +146,7 @@ export default async function EmployerDetailsPage(props: {
             </p>
           </div>
 
-          <span className="w-fit rounded-[8px] border border-white/10 bg-zinc-950 px-3 py-2 text-sm font-medium text-zinc-200">
+          <span className="w-fit rounded-[8px] border border-emerald-300/20 bg-emerald-300/5 px-3 py-2 text-sm font-medium text-emerald-100">
             {currentEmployer.is_current ? "Current" : "Past"}
           </span>
         </div>

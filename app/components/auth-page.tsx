@@ -15,17 +15,17 @@ type AuthPageProps = {
 const authCopy = {
   "sign-in": {
     eyebrow: "Welcome back",
-    title: "Sign in to Aaplio",
+    title: "Sign in to Tracklio",
     description:
       "Return to your job search workspace and review the next action for every active opportunity.",
     submitLabel: "Sign in",
-    alternateLabel: "New to Aaplio?",
+    alternateLabel: "New to Tracklio?",
     alternateAction: "Create an account",
     alternateHref: "/sign-up",
   },
   "sign-up": {
     eyebrow: "Start your workspace",
-    title: "Create your Aaplio account",
+    title: "Create your Tracklio account",
     description:
       "Set up a focused pipeline for applications, interviews, follow-ups, and offers.",
     submitLabel: "Create account",
@@ -55,7 +55,7 @@ function Field({
       <span>{label}</span>
       <input
         autoComplete={autoComplete}
-        className="h-12 rounded-[8px] border border-white/10 bg-black px-4 text-base text-white outline-none transition placeholder:text-zinc-600 focus:border-white/40 focus:ring-2 focus:ring-white/10"
+        className="h-12 rounded-[8px] border border-white/10 bg-black px-4 text-base text-white outline-none transition placeholder:text-zinc-600 focus:border-emerald-300/45 focus:ring-2 focus:ring-emerald-300/10"
         name={name}
         onChange={(event) => onChange(event.target.value)}
         required
@@ -157,31 +157,28 @@ export function AuthPage({ mode }: AuthPageProps) {
   };
 
   return (
-    <main className="relative grid min-h-screen overflow-hidden bg-black text-white lg:grid-cols-[1fr_520px]">
+    <main className="relative grid min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.12),transparent_34%),#000000] text-white lg:grid-cols-[1fr_520px]">
       <div
         className="absolute inset-0 opacity-30"
         aria-hidden="true"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)",
+            "linear-gradient(to right, rgba(110,231,183,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.07) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
         }}
       />
 
-      <section className="relative hidden border-r border-white/10 bg-[linear-gradient(200deg,#262626_0%,#000000_72%)] px-10 py-8 lg:flex lg:flex-col lg:justify-between">
+      <section className="relative hidden border-r border-emerald-300/10 bg-[linear-gradient(200deg,rgba(6,78,59,0.22)_0%,#000000_72%)] px-10 py-8 lg:flex lg:flex-col lg:justify-between">
         <Link
           href="/"
           className="flex items-center gap-3"
-          aria-label="Aaplio home"
+          aria-label="Tracklio home"
         >
-          <span className="grid size-8 place-items-center rounded-[8px] border border-white/15 bg-white text-sm font-bold text-black">
-            T
-          </span>
-          <span className="text-sm font-semibold text-white">Aaplio</span>
+          <span className="text-sm font-semibold text-white">Tracklio</span>
         </Link>
 
         <Reveal className="max-w-xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.1em] text-zinc-400">
+          <p className="text-sm font-semibold uppercase tracking-[0.1em] text-emerald-300">
             {copy.eyebrow}
           </p>
           <h1 className="mt-4 text-5xl font-semibold leading-[1.05] text-white">
@@ -197,9 +194,9 @@ export function AuthPage({ mode }: AuthPageProps) {
           {["Roles", "Follow-ups", "Offers"].map((item) => (
             <div
               key={item}
-              className="rounded-[8px] border border-white/10 bg-black/60 p-4"
+              className="rounded-[8px] border border-emerald-300/15 bg-black/60 p-4"
             >
-              <p className="text-xs font-medium uppercase tracking-[0.1em] text-zinc-500">
+              <p className="text-xs font-medium uppercase tracking-[0.1em] text-emerald-300/70">
                 {item}
               </p>
               <p className="mt-3 text-2xl font-semibold text-white">
@@ -215,16 +212,13 @@ export function AuthPage({ mode }: AuthPageProps) {
           <Link
             href="/"
             className="mb-10 inline-flex items-center gap-3 lg:hidden"
-            aria-label="Aaplio home"
+            aria-label="Tracklio home"
           >
-            <span className="grid size-8 place-items-center rounded-[8px] border border-white/15 bg-white text-sm font-bold text-black">
-              T
-            </span>
-            <span className="text-sm font-semibold text-white">Aaplio</span>
+            <span className="text-sm font-semibold text-white">Tracklio</span>
           </Link>
 
-          <div className="rounded-[8px] border border-white/10 bg-zinc-950 p-6 shadow-2xl shadow-black/60 sm:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.1em] text-zinc-500">
+          <div className="rounded-[8px] border border-emerald-300/15 bg-zinc-950 p-6 shadow-[0_0_36px_rgba(16,185,129,0.12)] sm:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.1em] text-emerald-300/80">
               {copy.eyebrow}
             </p>
             <h2 className="mt-3 text-3xl font-semibold leading-tight text-white">
@@ -266,18 +260,18 @@ export function AuthPage({ mode }: AuthPageProps) {
               ) : null}
 
               {error ? (
-                <p className="rounded-[8px] border border-white/10 bg-black px-4 py-3 text-sm text-zinc-200">
+                <p className="rounded-[8px] border border-red-400/25 bg-red-500/10 px-4 py-3 text-sm text-red-100">
                   {error}
                 </p>
               ) : null}
               {success ? (
-                <p className="rounded-[8px] border border-white/10 bg-black px-4 py-3 text-sm text-zinc-200">
+                <p className="rounded-[8px] border border-emerald-400/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-100">
                   {success}
                 </p>
               ) : null}
 
               <button
-                className="mt-2 h-12 rounded-[8px] bg-white px-5 text-sm font-semibold text-black transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:bg-zinc-500"
+                className="mt-2 h-12 rounded-[8px] bg-emerald-300 px-5 text-sm font-semibold text-black shadow-[0_0_24px_rgba(110,231,183,0.28)] transition hover:bg-emerald-200 disabled:cursor-not-allowed disabled:bg-zinc-500"
                 disabled={loading}
                 type="submit"
               >
@@ -289,7 +283,7 @@ export function AuthPage({ mode }: AuthPageProps) {
               {copy.alternateLabel}{" "}
               <Link
                 href={copy.alternateHref}
-                className="font-semibold text-white hover:text-zinc-300"
+                className="font-semibold text-white hover:text-emerald-200"
               >
                 {copy.alternateAction}
               </Link>
